@@ -1,6 +1,6 @@
-import Cart from '../models/cartModel.js';
-import Product from '../models/productModel.js';
-import { addToCartSchema } from '../validators/cartValidator.js';
+import Cart from '../models/cart.models.js';
+import Product from '../models/product.models.js';
+import { addToCartSchema } from '../validators/cart.validator.js';
 
 export const addToCart = async (req, res) => {
     try {
