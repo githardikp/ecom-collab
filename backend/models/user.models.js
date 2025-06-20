@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import { z } from 'zod'
 
 const addressSchema = mongoose.Schema({
     street: { type: String, required: true },
@@ -9,16 +8,17 @@ const addressSchema = mongoose.Schema({
     country: { type: String, required: true },
 });
 
-const Address = mongoose.model("Address", addressSchema);
-
 const userSchema = mongoose.Schema({
-    name: z.string().min(3, "Enter a minimum of 3 characters"),
-    email: z.string().email("Envalid Email Address"),
-    password: z.string().min(6, "Enter atleast 6 character password"),
-    address: { type: mongoose.Schema.Types.ObjectId, ref: "Address" }
+    name: { type: String, required: true },
+    email: { type: String, required: true, unique: true },
+    password: { type: String, required: true },
+    address: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Address",
+    },
+});
 
-})
+const Address = mongoose.model("Address", addressSchema);
+const User = mongoose.model("User", userSchema);
 
-const users = mongoose.model('User', userSchema)
-
-export default { users, Address }
+export { Address, User };
